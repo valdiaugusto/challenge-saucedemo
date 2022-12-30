@@ -1,6 +1,6 @@
 # Instrucciones de uso
  * Tener instalado Java JDK 16 
- * Descargar gradle desde 
+ * Descargar gradle desde (version recomendada 7.5.1)
         <pre>https://gradle.org/install/ </pre>
  * Clonar el repositorio
  * En la carpeta del proyecto, ejecutar los comandos:

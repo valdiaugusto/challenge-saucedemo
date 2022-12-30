@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.8.1'
+}
+
+group 'practia.automatizacion.topaz'
+version '1.0-SNAPSHOT'
+
+def allureVersion = '2.14.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'org.testng', name: 'testng', version: '6.14.3'
+    implementation group: 'io.qameta.allure', name: 'allure-cucumber4-jvm', version: allureVersion
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.4.0'
+    runtimeOnly group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.7'
+}
+
+allure {
+    version = allureVersion
+    autoconfigure = false
+    aspectjweaver = true
+    configuration = 'implementation'
+    resultsDir = new File(System.properties.getProperty('resultsDir', getBuildDir().toString() + "/allure-results"))
+    useTestNG { version = allureVersion }
+}
+
+task TestTask(type: Test) {
+    useTestNG()
+    systemProperties System.getProperties()
+}
+
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

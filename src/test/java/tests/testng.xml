@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test thread-count="5" name="Chrome All Test">
+        <parameter name="tipoNavegador" value="Chrome"/>
+        <packages>
+            <package name="tests"/>
+        </packages>
+    </test>
+    <test thread-count="5" name="Firefox All Test">
+        <parameter name="tipoNavegador" value="Firefox"/>
+        <packages>
+            <package name="tests"/>
+        </packages>
+    </test>
+</suite>

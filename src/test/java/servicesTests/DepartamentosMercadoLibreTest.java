@@ -1,12 +1,9 @@
 package servicesTests;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
+import io.qameta.allure.*;
 
 import static io.restassured.RestAssured.*;
 
-import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
 import listeners.StepReporterEventListener;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
@@ -38,7 +35,7 @@ public class DepartamentosMercadoLibreTest {
                                 .extract()
                                 .path("departments[0].categories[" + i + "].name");
             validacionDepartamentos.add(resultado);
-            Assert.assertEquals(listaDepartamentos.get(i), resultado, "El resultado del departamento '" + resultado + "' no coincide con '" + listaDepartamentos.get(i) + "' de la validación");
+            reporteDepartamento(listaDepartamentos.get(i), resultado);
             LOGGER.info("El departamento obtenido '" + resultado + "' coincide con el designado a validar : " + listaDepartamentos.get(i));
         }
         Assert.assertEquals(listaDepartamentos.size(), validacionDepartamentos.size(), "La cantidad de departamentos '" + listaDepartamentos.size() + "' no coincide con los validados '" + validacionDepartamentos.size() + "'");
@@ -51,5 +48,10 @@ public class DepartamentosMercadoLibreTest {
         listaDepartamentos.add("Electrónica, Audio y Video");
         listaDepartamentos.add("Consolas y Videojuegos");
         listaDepartamentos.add("Televisores");
+    }
+
+    @Step("Se prueba la respuesta del departamento {dpto} con el resultado obtenido {resultado}")
+    private void reporteDepartamento(String dpto, String resultado) {
+        Assert.assertEquals(dpto, resultado, "El resultado del departamento '" + resultado + "' no coincide con '" + dpto + "' de la validación");
     }
 }
